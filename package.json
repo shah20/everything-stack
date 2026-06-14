@@ -1,0 +1,30 @@
+{
+  "name": "everything-stack",
+  "version": "0.1.0",
+  "scripts": {
+    "build": "tsc",
+    "watch": "tsc -w",
+    "test": "jest",
+    "cdk": "cdk",
+    "frontend": "cd frontend && npm run dev",
+    "frontend:build": "cd frontend && npm run build",
+    "bootstrap": "cd infra && NODE_ENV=dev cdk bootstrap --profile dev-poweruser",
+    "deploy": "npm run frontend:build && cd infra && NODE_ENV=dev cdk deploy --profile dev-poweruser",
+    "diff": "cd infra && NODE_ENV=dev cdk diff --profile dev-poweruser",
+    "synth": "cd infra && NODE_ENV=dev cdk synth --profile dev-poweruser"
+  },
+  "devDependencies": {
+    "@types/jest": "^30",
+    "@types/node": "^24.10.1",
+    "aws-cdk": "2.1126.0",
+    "jest": "^30",
+    "ts-jest": "^29",
+    "ts-node": "^10.9.2",
+    "typescript": "~5.9.3"
+  },
+  "dependencies": {
+    "aws-cdk-lib": "^2.257.0",
+    "config": "^4.4.1",
+    "constructs": "^10.5.0"
+  }
+}
