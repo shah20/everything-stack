@@ -11,7 +11,8 @@
     "bootstrap": "cd infra && NODE_ENV=dev cdk bootstrap --profile dev-poweruser",
     "deploy": "npm run frontend:build && cd infra && NODE_ENV=dev cdk deploy --profile dev-poweruser",
     "diff": "cd infra && NODE_ENV=dev cdk diff --profile dev-poweruser",
-    "synth": "cd infra && NODE_ENV=dev cdk synth --profile dev-poweruser"
+    "synth": "cd infra && NODE_ENV=dev cdk synth --profile dev-poweruser",
+    "destroy": "cd infra && NODE_ENV=dev cdk destroy --profile dev-poweruser"
   },
   "devDependencies": {
     "@types/jest": "^30",
