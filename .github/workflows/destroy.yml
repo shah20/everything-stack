@@ -46,4 +46,6 @@ jobs:
         run: aws sts get-caller-identity
 
       - name: Destroy stack
+        env:
+          CDK_DESTROY: true
         run: npm run destroy:ci
