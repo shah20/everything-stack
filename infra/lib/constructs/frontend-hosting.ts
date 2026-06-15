@@ -10,7 +10,7 @@ export class FrontendHosting extends Construct {
   constructor(scope: Construct, id: string, props: StackProps) {
     super(scope, id);
 
-    const assetPath = process.env.CDK_DESTROY === 'true' ? './../empty-dist' : './../frontend/dist';
+    const assetPath = process.env.CDK_DESTROY === 'true' ? './../frontend' : './../frontend/dist';
 
     this.bucket = new s3.Bucket(this, `FrontendHosting-${props.namespace}`, {
       removalPolicy: RemovalPolicy.DESTROY,
