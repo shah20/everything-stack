@@ -1,0 +1,48 @@
+name: deploy
+
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Environment to deploy to'
+        required: true
+        default: 'dev'
+        type: choice
+        options:
+          - production
+          - dev
+
+permissions:
+  id-token: write
+  contents: read
+
+env:
+  NODE_VERSION: '24.x'
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment: ${{ inputs.environment }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+
+      - name: Install dependencies
+        run: npm install
+
+      - uses: ./.github/actions/aws-oidc
+        with:
+          iam-role-arn: ${{ vars.AWS_OIDC_ROLE_ARN }}
+
+      - name: Verify AWS identity
+        run: aws sts get-caller-identity
+
+      - name: Deploy to ${{ env.ENVIRONMENT }}
+        env:
+          NODE_ENV: ${{ inputs.environment }}
+        run: npm run deploy:ci

@@ -1,0 +1,22 @@
+name: AWS OIDC Login
+description: Configure AWS credentials using GitHub OIDC
+
+inputs:
+  iam-role-arn:
+    description: IAM Role arn to assume
+    required: true
+
+  aws-region:
+    description: AWS Region
+    required: false
+    default: ap-south-1
+
+runs:
+  using: composite
+  steps:
+    - name: Configure AWS credentials
+      uses: aws-actions/configure-aws-credentials@v4
+      with:
+        aws-region: ${{ inputs.aws-region }}
+        role-to-assume: ${{ inputs.iam-role-arn }}
+        role-session-name: gh-${{ github.actor }}-${{ github.run_number }}
