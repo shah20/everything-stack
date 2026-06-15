@@ -14,7 +14,7 @@
     "synth": "cd infra && NODE_ENV=dev cdk synth --profile dev-poweruser",
     "destroy": "cd infra && NODE_ENV=dev cdk destroy --profile dev-poweruser",
     "deploy:ci": "npm run frontend:build && cd infra && cdk deploy --require-approval never",
-    "destroy:ci": "cd infra && cdk destroy --require-approval never"
+    "destroy:ci": "cd infra && cdk destroy --force"
   },
   "devDependencies": {
     "@types/jest": "^30",
